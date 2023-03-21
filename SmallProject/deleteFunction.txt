@@ -1,0 +1,34 @@
+function deleteContact() 
+{
+
+	let confirmation = confirm("Are you sure you want to delete this contact?");
+	if (confirmation) 
+	{
+		let fullName = cc.currentFirst + " " + cc.currentLast;
+		let tmp = {delete:fullName, UserId:cc.currentID};
+		let jsonPayload = JSON.stringify(tmp);
+
+		let url = urlBase + '/LAMPAPI/DeleteContact.' + extension;
+
+		let xhr = new XMLHttpRequest();
+        xhr.open("POST", url, true);
+        xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+        try
+        {
+            xhr.onreadystatechange = function() 
+            {
+                if(this.readyState == 4 && this.status == 200) 
+                {                    
+                   saveCookie();
+				   window.location.href = "contacts.html";
+                }
+            };
+
+            xhr.send(jsonPayload);
+        }
+        catch(err)
+        {
+            setFormErrorMessage(errInfo, err.message);
+        }    
+	 }
+}

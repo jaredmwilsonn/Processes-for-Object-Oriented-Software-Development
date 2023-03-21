@@ -1,0 +1,16 @@
+Small Project Table Notation:
+
+Users:
+ID
+FirstName
+LastName
+Login
+Password
+
+Contacts:
+ID
+FirstName
+LastName
+Phone
+Email
+UserID
